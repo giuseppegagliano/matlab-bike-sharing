@@ -1,0 +1,89 @@
+[System]
+Name='fuzzy_daily'
+Type='mamdani'
+Version=2.0
+NumInputs=6
+NumOutputs=1
+NumRules=17
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='3season'
+Range=[0 4]
+NumMFs=4
+MF1='winter':'trimf',[3 4 5]
+MF2='spring':'trimf',[0 1 2]
+MF3='summer':'trimf',[1 2 3]
+MF4='fall':'trimf',[2 3 4]
+
+[Input2]
+Name='4year'
+Range=[0 1]
+NumMFs=2
+MF1='2011':'trimf',[0 0 0.5]
+MF2='2012':'trimf',[0.5 1 1]
+
+[Input3]
+Name='5month'
+Range=[0 12]
+NumMFs=3
+MF1='ColdMonths1':'trapmf',[0 0 2 5]
+MF2='HotMonths':'trapmf',[2 5 9.5 11]
+MF3='ColdMonths2':'trapmf',[8 11 12 12]
+
+[Input4]
+Name='7weekday'
+Range=[0 6]
+NumMFs=3
+MF1='WorkingDays':'trapmf',[0 1 3 5]
+MF2='Weekend2':'trapmf',[3 5 6 6]
+MF3='Weekend1':'trimf',[0 0 1]
+
+[Input5]
+Name='9weathersit'
+Range=[1 4]
+NumMFs=4
+MF1='VeryGoodWeather':'trimf',[0 1 2]
+MF2='GoodWeather':'trimf',[1 2 3]
+MF3='BadWeather':'trimf',[2 3 4]
+MF4='VeryBadWeather':'trimf',[3 4 5]
+
+[Input6]
+Name='11atemp'
+Range=[0 1]
+NumMFs=3
+MF1='Cold':'trapmf',[-0.45 -0.05 0.329 0.552004333694474]
+MF2='Ideal':'trimf',[0.3 0.586 0.88569880823402]
+MF3='Hot':'trapmf',[0.6 0.744853737811484 1.02 1.35]
+
+[Output1]
+Name='RentedBikes'
+Range=[0 9000]
+NumMFs=4
+MF1='Low':'trapmf',[300 1000 2500 3500]
+MF2='Medium':'trapmf',[2500 3500 5000 6000]
+MF3='High':'trapmf',[5000 6000 9000 9000]
+MF4='VeryLow':'trimf',[0 0 500]
+
+[Rules]
+2 1 1 0 3 1, 4 (1) : 1
+1 0 1 0 3 1, 4 (1) : 1
+4 2 -3 0 -3 2, 3 (1) : 1
+0 2 2 0 -3 2, 3 (1) : 1
+0 0 1 0 0 1, 1 (1) : 1
+0 0 3 0 0 1, 1 (1) : 1
+0 2 3 0 0 0, 3 (1) : 1
+0 1 1 0 0 0, 4 (1) : 1
+0 1 0 0 3 1, 4 (1) : 1
+2 1 0 0 0 0, 4 (1) : 1
+0 1 3 0 0 0, 2 (1) : 1
+0 2 3 0 0 0, 2 (1) : 1
+0 2 1 0 0 0, 2 (1) : 1
+3 1 1 0 0 0, 2 (1) : 1
+0 0 0 0 3 1, 1 (1) : 1
+0 0 0 2 2 2, 2 (1) : 1
+0 0 0 3 2 2, 2 (1) : 1
